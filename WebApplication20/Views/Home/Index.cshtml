@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<h6 id="errormsg"></h6>
+<br />
+<form id="form" onsubmit="return false;">
+    <input type="hidden" name="teacherid" id="teacherid" value="" /><br /><br />
+    <input type="text" name="teacher_name" id="teacher_name" value="" /><br /><br />
+    <input type="text" name="working_hours" id="working_hours" value="" /><br /><br />
+    <input type="submit"  value="Update" />
+</form>
+<button onclick="loaddata()">Click</button>
+<div id="loaddata"></div>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        //  loaddata();
+        $("#form").toggle();
+    })
+    function loaddata() {
+        $("#loaddata").load("@Url.Action("getdata")");
+    }
+    function del(id) {
+        $.ajax({
+            url: "@Url.Action("delete")",
+            type: 'GET',
+            data: { id: id },
+            success: function (response) {
+                // console.log(response.status);
+                $("#errormsg").html(response.message).css('background-color', response.color);
+                loaddata();
+            }
+
+        }) 
+    }
+    $("#form").submit(function () {
+        $.ajax({
+            url: "@Url.Action("update")",
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (response) {
+                // console.log(response.status);
+                $("#errormsg").html(response.message).css('background-color', response.color);
+                $("#teacherid").val('');
+                $("#teacher_name").val('');
+                $("#working_hours").val('');
+                $("#form").toggle();
+                loaddata();
+            }
+
+        }) 
+    })
+    function update(id, name, timing) {
+
+        $("#teacherid").val(id);
+        $("#teacher_name").val(name);
+        $("#working_hours").val(timing);
+        $("#form").toggle();
+    }
+</script>

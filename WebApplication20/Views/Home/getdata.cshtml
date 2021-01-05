@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebApplication20.Models.teacher>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.teacher_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.working_hours)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.teacher_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.working_hours)
+        </td>
+        <td>
+            <button onclick="del(@item.teacherid)">Delete</button>
+            <button onclick="update(@item.teacherid,'@item.teacher_name','@item.working_hours')">Update</button>
+        </td>
+    </tr>
+}
+
+</table>

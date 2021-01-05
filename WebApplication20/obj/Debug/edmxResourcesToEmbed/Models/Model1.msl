@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="aptech_studentsModelStoreContainer" CdmEntityContainer="aptech_studentsEntities">
+    <EntitySetMapping Name="courses">
+      <EntityTypeMapping TypeName="aptech_studentsModel.cours">
+        <MappingFragment StoreEntitySet="courses">
+          <ScalarProperty Name="courseid" ColumnName="courseid" />
+          <ScalarProperty Name="course_name" ColumnName="course_name" />
+          <ScalarProperty Name="teacher" ColumnName="teacher" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="teachers">
+      <EntityTypeMapping TypeName="aptech_studentsModel.teacher">
+        <MappingFragment StoreEntitySet="teachers">
+          <ScalarProperty Name="teacherid" ColumnName="teacherid" />
+          <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+          <ScalarProperty Name="working_hours" ColumnName="working_hours" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

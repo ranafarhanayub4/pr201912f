@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aptech_studentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cours">
+    <Key>
+      <PropertyRef Name="courseid" />
+    </Key>
+    <Property Name="courseid" Type="Int32" Nullable="false" />
+    <Property Name="course_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="teacher" Type="Int32" />
+    <NavigationProperty Name="teacher1" Relationship="Self.FK__courses__teacher__25869641" FromRole="courses" ToRole="teachers" />
+  </EntityType>
+  <EntityType Name="teacher">
+    <Key>
+      <PropertyRef Name="teacherid" />
+    </Key>
+    <Property Name="teacherid" Type="Int32" Nullable="false" />
+    <Property Name="teacher_name" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="working_hours" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="courses" Relationship="Self.FK__courses__teacher__25869641" FromRole="teachers" ToRole="courses" />
+  </EntityType>
+  <Association Name="FK__courses__teacher__25869641">
+    <End Role="teachers" Type="Self.teacher" Multiplicity="0..1" />
+    <End Role="courses" Type="Self.cours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="teachers">
+        <PropertyRef Name="teacherid" />
+      </Principal>
+      <Dependent Role="courses">
+        <PropertyRef Name="teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="aptech_studentsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="courses" EntityType="Self.cours" />
+    <EntitySet Name="teachers" EntityType="Self.teacher" />
+    <AssociationSet Name="FK__courses__teacher__25869641" Association="Self.FK__courses__teacher__25869641">
+      <End Role="teachers" EntitySet="teachers" />
+      <End Role="courses" EntitySet="courses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

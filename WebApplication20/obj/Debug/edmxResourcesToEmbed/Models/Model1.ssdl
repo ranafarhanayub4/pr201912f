@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aptech_studentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="courses">
+    <Key>
+      <PropertyRef Name="courseid" />
+    </Key>
+    <Property Name="courseid" Type="int" Nullable="false" />
+    <Property Name="course_name" Type="varchar" MaxLength="50" />
+    <Property Name="teacher" Type="int" />
+  </EntityType>
+  <EntityType Name="teachers">
+    <Key>
+      <PropertyRef Name="teacherid" />
+    </Key>
+    <Property Name="teacherid" Type="int" Nullable="false" />
+    <Property Name="teacher_name" Type="char" MaxLength="20" />
+    <Property Name="working_hours" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__courses__teacher__25869641">
+    <End Role="teachers" Type="Self.teachers" Multiplicity="0..1" />
+    <End Role="courses" Type="Self.courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="teachers">
+        <PropertyRef Name="teacherid" />
+      </Principal>
+      <Dependent Role="courses">
+        <PropertyRef Name="teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="aptech_studentsModelStoreContainer">
+    <EntitySet Name="courses" EntityType="Self.courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="teachers" EntityType="Self.teachers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__courses__teacher__25869641" Association="Self.FK__courses__teacher__25869641">
+      <End Role="teachers" EntitySet="teachers" />
+      <End Role="courses" EntitySet="courses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
